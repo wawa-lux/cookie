@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -69,21 +69,12 @@ html, body {
     touch-action: manipulation;
 }
 
-/* STACK FIXED */
-#stack {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    pointer-events: none; /* VERY IMPORTANT */
-}
-
+/* COOKIE */
 .cookie {
+    position: absolute;
     font-size: 40px;
-    line-height: 1;
+    bottom: 0;
+    pointer-events: none;
 }
 
 .huge { font-size: 70px; }
@@ -132,9 +123,7 @@ html, body {
 </div>
 
 <!-- GAME -->
-<div id="game" class="page">
-    <div id="stack"></div>
-</div>
+<div id="game" class="page"></div>
 
 <!-- COMMANDS -->
 <div id="commands" class="page">
@@ -161,14 +150,13 @@ html, body {
 
 <script>
 const game = document.getElementById("game");
-const stack = document.getElementById("stack");
 
 let altClicks = 0;
 let tapCount = 0;
 let lastTap = 0;
 let fullscreenStarted = false;
 
-/* ===== FULLSCREEN FIX (MOBILE SAFE) ===== */
+/* ===== FULLSCREEN ===== */
 function enterFullscreen() {
     if (!fullscreenStarted) {
         fullscreenStarted = true;
@@ -184,14 +172,11 @@ function showPage(id) {
     document.getElementById(id).style.display = "block";
 }
 
-function goGame() {
-    showPage("game");
-}
-
+function goGame() { showPage("game"); }
 function goHome() { showPage("home"); }
 function goCommands() { showPage("commands"); }
 
-/* ===== SPAWN COOKIE (NO LIMIT) ===== */
+/* ===== SPAWN COOKIE RANDOM ===== */
 function spawnCookie(size = "normal", double = false) {
     const c = document.createElement("div");
     c.className = "cookie";
@@ -200,11 +185,16 @@ function spawnCookie(size = "normal", double = false) {
     if (size === "huge") c.classList.add("huge");
     if (size === "mega") c.classList.add("mega");
 
-    stack.appendChild(c);
+    const maxX = window.innerWidth - 120;
+    const randomX = Math.random() * maxX;
 
-    /* HARD FIX: if stack is too big, scroll it internally */
-    if (stack.children.length > 300) {
-        stack.removeChild(stack.lastChild);
+    c.style.left = randomX + "px";
+
+    game.appendChild(c);
+
+    /* limit soft (nu blochează) */
+    if (game.children.length > 400) {
+        game.removeChild(game.children[0]);
     }
 }
 
@@ -255,9 +245,12 @@ document.addEventListener("keydown", e => {
         milk.innerHTML = "🥛";
         game.appendChild(milk);
 
+        document.querySelectorAll(".cookie").forEach(c => {
+            c.style.transform = `translateY(-800px)`;
+        });
+
         setTimeout(() => {
-            stack.innerHTML = "";
-            milk.remove();
+            game.innerHTML = "";
         }, 1200);
     }
 });
