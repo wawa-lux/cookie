@@ -1,124 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Birthday Document</title>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
+<meta charset="UTF-8">
+<title>Play with Cookies</title>
+<style>
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
     }
 
     body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
+        height: 100vh;
+        overflow: hidden;
     }
 
-    .card {
-      width: 420px;
-      padding: 35px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-      animation: float 4s ease-in-out infinite;
+    .page {
+        display: none;
+        height: 100vh;
+        width: 100vw;
     }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 2rem;
-      letter-spacing: 2px;
-      color: #ffb703;
+    /* ===== HOME PAGE ===== */
+    #home {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: yellow;
+        text-align: center;
     }
 
-    p {
-      margin: 14px 0;
-      padding: 12px 16px;
-      border-radius: 12px;
-      background: rgba(0, 0, 0, 0.35);
-      font-size: 0.95rem;
-      animation: slideIn 0.8s ease forwards;
-      opacity: 0;
+    #home h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
     }
 
-    p:nth-child(1) { animation-delay: 0.2s; }
-    p:nth-child(2) { animation-delay: 0.4s; }
-    p:nth-child(3) { animation-delay: 0.6s; }
-    p:nth-child(4) { animation-delay: 0.8s; }
-    p:nth-child(5) { animation-delay: 1s; }
-    p:nth-child(6) { animation-delay: 1.2s; }
-
-    p:hover {
-      background: rgba(255, 183, 3, 0.25);
-      transform: translateX(6px);
-      transition: 0.3s;
+    .btn {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 8px;
     }
 
-    hr {
-      border: none;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #ffb703, transparent);
-      margin: 20px 0;
+    .play-btn {
+        background: blue;
+        color: white;
     }
 
-    h4 {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 0.75rem;
-      opacity: 0.85;
+    .cmd-btn {
+        background: black;
+        color: white;
     }
 
-    @keyframes slideIn {
-      from {
-        transform: translateY(15px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    /* ===== GAME PAGE ===== */
+    #game {
+        background: pink;
+        position: relative;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
+    .cookie {
+        position: absolute;
+        top: -60px;
+        font-size: 40px;
+        animation: fall 3s linear forwards;
+        user-select: none;
+        pointer-events: none;
     }
-  </style>
+
+    @keyframes fall {
+        to {
+            top: calc(100vh - 50px);
+        }
+    }
+
+    .huge {
+        font-size: 70px;
+    }
+
+    .mega {
+        font-size: 110px;
+    }
+
+    .milk {
+        position: absolute;
+        font-size: 100px;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* ===== COMMANDS PAGE ===== */
+    #commands {
+        background: #f2f2f2;
+        padding: 40px;
+    }
+
+    #commands h2 {
+        margin-bottom: 20px;
+    }
+
+    #commands ul {
+        font-size: 1.2rem;
+        line-height: 2rem;
+    }
+
+    .back-btn {
+        margin-top: 30px;
+        background: blue;
+        color: white;
+    }
+</style>
 </head>
-
 <body>
 
-  <div class="card">
-    <h2>BIRTHDAY FORM</h2>
-    <hr>
+<!-- HOME -->
+<div id="home" class="page" style="display:flex;">
+    <h1>Play with cookies now!</h1>
+    <button class="btn play-btn" onclick="goGame()">Play now!</button>
+    <button class="btn cmd-btn" onclick="goCommands()">Commands</button>
+</div>
 
-    <p>Baby's name: plxhz</p>
-    <p>Dad's name: Luxen</p>
-    <p>Mom's name: Gaga</p>
-    <p>Baby's gender: Female</p>
+<!-- GAME -->
+<div id="game" class="page"></div>
 
-    <hr>
+<!-- COMMANDS -->
+<div id="commands" class="page">
+    <h2>Game Commands</h2>
+    <ul>
+        <li><b>Click</b> – Spawn a cookie</li>
+        <li><b>Ctrl + Click</b> – Double cookie</li>
+        <li><b>Alt + Click</b> – Huge cookie</li>
+        <li><b>Alt + Click x3</b> – Mega huge cookie</li>
+        <li><b>Space</b> – Random cookie</li>
+        <li><b>Tab</b> – Milk appears and all cookies fly away, game restarts</li>
+    </ul>
+    <button class="btn back-btn" onclick="goHome()">Back</button>
+</div>
 
-    <p>Baby's birth date: 20 december 2025</p>
-    <p>Brothers: Alamin </p>
-    <p>Husband: Rax (as he wants)</p>
-    <p>Kids: Leon</p>
+<script>
+let game = document.getElementById("game");
+let altClicks = 0;
 
-    <hr>
+function goGame() {
+    showPage("game");
+}
 
-    <h4>Document issued by the security forces of the discord hospital ✓</h4>
-  </div>
+function goHome() {
+    showPage("home");
+}
+
+function goCommands() {
+    showPage("commands");
+}
+
+function showPage(id) {
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById(id).style.display = "block";
+}
+
+game.addEventListener("click", (e) => {
+    let cookie = document.createElement("div");
+    cookie.classList.add("cookie");
+    cookie.innerHTML = "🍪";
+    cookie.style.left = Math.random() * (window.innerWidth - 60) + "px";
+
+    if (e.ctrlKey) {
+        cookie.innerHTML = "🍪🍪";
+    }
+
+    if (e.altKey) {
+        altClicks++;
+        if (altClicks >= 3) {
+            cookie.classList.add("mega");
+            altClicks = 0;
+        } else {
+            cookie.classList.add("huge");
+        }
+    }
+
+    game.appendChild(cookie);
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        let cookie = document.createElement("div");
+        cookie.classList.add("cookie");
+        cookie.innerHTML = "🍪";
+        cookie.style.left = Math.random() * (window.innerWidth - 60) + "px";
+        game.appendChild(cookie);
+    }
+
+    if (e.code === "Tab") {
+        e.preventDefault();
+        let milk = document.createElement("div");
+        milk.classList.add("milk");
+        milk.innerHTML = "🥛";
+        game.appendChild(milk);
+
+        document.querySelectorAll(".cookie").forEach(c => {
+            c.style.animation = "none";
+            c.style.transform = `translate(${Math.random()*1000 - 500}px, -800px)`;
+        });
+
+        setTimeout(() => {
+            game.innerHTML = "";
+        }, 1500);
+    }
+});
+</script>
 
 </body>
 </html>
