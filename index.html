@@ -3,16 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Play with Cookies</title>
+
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
     font-family: Arial, sans-serif;
 }
 
-body {
-    height: 100vh;
+html, body {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -35,16 +38,16 @@ body {
 
 #home h1 {
     font-size: 3rem;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .btn {
-    padding: 15px 30px;
+    padding: 15px 35px;
     font-size: 1.2rem;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
     margin: 10px;
+    cursor: pointer;
 }
 
 .play-btn {
@@ -65,31 +68,26 @@ body {
     touch-action: manipulation;
 }
 
-.cookie {
+/* COOKIE STACK ZONE */
+#stack {
     position: absolute;
-    font-size: 40px;
-    user-select: none;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
     pointer-events: none;
-    animation: fall 0.8s ease-out forwards;
 }
 
-.huge {
-    font-size: 70px;
+.cookie {
+    font-size: 40px;
+    margin-top: -10px;
 }
 
-.mega {
-    font-size: 110px;
-}
+.huge { font-size: 70px; }
+.mega { font-size: 110px; }
 
-@keyframes fall {
-    from {
-        transform: translateY(-100px);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
+/* MILK */
 .milk {
     position: absolute;
     font-size: 120px;
@@ -100,26 +98,27 @@ body {
 
 /* ===== COMMANDS ===== */
 #commands {
-    background: #f0f0f0;
-    padding: 40px;
+    background: #f1f1f1;
+    padding: 30px;
 }
 
 #commands h2 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 #commands ul {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 2rem;
 }
 
 .back-btn {
-    margin-top: 30px;
+    margin-top: 25px;
     background: blue;
     color: white;
 }
 </style>
 </head>
+
 <body>
 
 <!-- HOME -->
@@ -130,61 +129,76 @@ body {
 </div>
 
 <!-- GAME -->
-<div id="game" class="page"></div>
+<div id="game" class="page">
+    <div id="stack"></div>
+</div>
 
 <!-- COMMANDS -->
 <div id="commands" class="page">
-    <h2>Game Commands</h2>
+    <h2>PC Commands</h2>
     <ul>
-        <li><b>Click / Tap</b> – Spawn a cookie</li>
+        <li><b>Click</b> – Spawn cookie</li>
         <li><b>Ctrl + Click</b> – Double cookie</li>
         <li><b>Alt + Click</b> – Huge cookie</li>
         <li><b>Alt + Click x3</b> – Mega huge cookie</li>
-        <li><b>Tap with 2 fingers (mobile)</b> – Huge cookie</li>
-        <li><b>Tap 3 times fast (mobile)</b> – Mega huge cookie</li>
         <li><b>Space</b> – Cookie</li>
-        <li><b>Tab</b> – Milk appears, cookies fly away, restart</li>
+        <li><b>Tab</b> – Milk, cookies fly away, restart</li>
     </ul>
+
+    <h2 style="margin-top:20px;">Mobile Commands</h2>
+    <ul>
+        <li><b>Tap</b> – Spawn cookie</li>
+        <li><b>2 Fingers Tap</b> – Huge cookie</li>
+        <li><b>3 Fast Taps</b> – Mega huge cookie</li>
+        <li><b>Rotate phone / Refresh</b> – Restart</li>
+    </ul>
+
     <button class="btn back-btn" onclick="goHome()">Back</button>
 </div>
 
 <script>
-let game = document.getElementById("game");
-let stackHeight = 0;
-let altClicks = 0;
-let lastTap = 0;
-let tapCount = 0;
+const game = document.getElementById("game");
+const stack = document.getElementById("stack");
 
+let altClicks = 0;
+let tapCount = 0;
+let lastTap = 0;
+
+/* ===== FULLSCREEN ===== */
+function enterFullscreen() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    }
+}
+
+/* ===== PAGE NAV ===== */
 function showPage(id) {
     document.querySelectorAll(".page").forEach(p => p.style.display = "none");
     document.getElementById(id).style.display = "block";
 }
 
-function goGame() { showPage("game"); }
+function goGame() {
+    showPage("game");
+    enterFullscreen();
+}
+
 function goHome() { showPage("home"); }
 function goCommands() { showPage("commands"); }
 
 /* ===== SPAWN COOKIE ===== */
 function spawnCookie(size = "normal", double = false) {
-    let cookie = document.createElement("div");
-    cookie.classList.add("cookie");
-    cookie.innerHTML = double ? "🍪🍪" : "🍪";
+    const c = document.createElement("div");
+    c.classList.add("cookie");
+    c.innerHTML = double ? "🍪🍪" : "🍪";
 
-    if (size === "huge") cookie.classList.add("huge");
-    if (size === "mega") cookie.classList.add("mega");
+    if (size === "huge") c.classList.add("huge");
+    if (size === "mega") c.classList.add("mega");
 
-    let x = Math.random() * (window.innerWidth - 80);
-    let y = window.innerHeight - 60 - stackHeight;
-
-    cookie.style.left = x + "px";
-    cookie.style.top = y + "px";
-
-    stackHeight += 45;
-    game.appendChild(cookie);
+    stack.appendChild(c);
 }
 
-/* ===== MOUSE CLICK ===== */
-game.addEventListener("click", (e) => {
+/* ===== MOUSE ===== */
+game.addEventListener("click", e => {
     let size = "normal";
     let double = false;
 
@@ -199,14 +213,10 @@ game.addEventListener("click", (e) => {
     spawnCookie(size, double);
 });
 
-/* ===== MOBILE TOUCH ===== */
-game.addEventListener("touchstart", (e) => {
+/* ===== MOBILE ===== */
+game.addEventListener("touchstart", e => {
     let now = Date.now();
-    if (now - lastTap < 300) {
-        tapCount++;
-    } else {
-        tapCount = 1;
-    }
+    tapCount = (now - lastTap < 300) ? tapCount + 1 : 1;
     lastTap = now;
 
     if (e.touches.length === 2) {
@@ -220,25 +230,21 @@ game.addEventListener("touchstart", (e) => {
 });
 
 /* ===== KEYBOARD ===== */
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", e => {
     if (e.code === "Space") {
         spawnCookie();
     }
 
     if (e.code === "Tab") {
         e.preventDefault();
-        let milk = document.createElement("div");
-        milk.classList.add("milk");
+        const milk = document.createElement("div");
+        milk.className = "milk";
         milk.innerHTML = "🥛";
         game.appendChild(milk);
 
-        document.querySelectorAll(".cookie").forEach(c => {
-            c.style.transform = `translate(${Math.random()*800 - 400}px, -800px)`;
-        });
-
         setTimeout(() => {
-            game.innerHTML = "";
-            stackHeight = 0;
+            stack.innerHTML = "";
+            milk.remove();
         }, 1500);
     }
 });
