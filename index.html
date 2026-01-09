@@ -1,6 +1,226 @@
-<DOCTYPE html>
- <html>
-  <body>
-   <h1>wawa</h1>
-  </body>
- </html>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stumble Tracer — Home Page</title>
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    .header {
+      padding: 25px 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .logo {
+      color: #ffb703;
+      text-shadow: 0 10px 30px rgba(255,183,3,.45);
+    }
+
+    .nav a {
+      margin-left: 20px;
+      opacity: .9;
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      margin-top: 60px;
+      padding: 40px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .hero h2 {
+      color: #ffb703;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    /* BUTTON */
+    .btn, .btn-discord {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffb703, #ff8f00);
+      color: #1b1b1b;
+      font-weight: 600;
+      box-shadow: 0 12px 35px rgba(255,183,3,.35);
+      transition: .3s;
+    }
+
+    .btn:hover, .btn-discord:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 45px rgba(255,183,3,.55);
+    }
+
+    /* PARTICLES */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      top: -20px;
+      width: 6px;
+      height: 6px;
+      background: rgba(122,255,170,.8);
+      border-radius: 50%;
+      animation: fall 10s linear infinite;
+      opacity: .4;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh); }
+    }
+
+    /* FEATURES */
+    .features-section {
+      margin-top: 100px;
+      text-align: center;
+    }
+
+    .features-title {
+      color: #ffb703;
+      margin-bottom: 15px;
+    }
+
+    .features-grid {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: rgba(0,0,0,.35);
+      padding: 25px;
+      border-radius: 18px;
+      transition: .4s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,183,3,.15);
+    }
+
+    .feature-title {
+      color: #ffb703;
+      margin-bottom: 10px;
+    }
+
+    /* READY */
+    .ready-section {
+      margin-top: 120px;
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(255,255,255,.05);
+      border-radius: 22px;
+    }
+
+    .ready-title {
+      color: #ffb703;
+      margin-bottom: 15px;
+    }
+
+    /* BOTTOM */
+    .bottom-info {
+      margin-top: 120px;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .bottom-left, .bottom-right {
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(12px);
+      padding: 25px;
+      border-radius: 18px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="particles">
+  <div class="particle" style="left:10%; animation-delay:1s"></div>
+  <div class="particle" style="left:30%; animation-delay:4s"></div>
+  <div class="particle" style="left:55%; animation-delay:2s"></div>
+  <div class="particle" style="left:80%; animation-delay:6s"></div>
+</div>
+
+<header class="header">
+  <div class="container">
+    <h1 class="logo">Stumble Tracer</h1>
+  </div>
+</header>
+
+<main class="home container">
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Stumble Tracer — Premier Classic SG Release</h2>
+      <p>
+        Stumble Tracer 0.56 is a special Stumble Guys modification for PC and mobile.
+        Built with safety, reliability and performance in focus.
+      </p>
+      <a class="btn" href="#">Get it now</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://cdn.discordapp.com/attachments/1445376566766076108/1452401443394031787/Sans_titre_431_202512061"
+           width="250">
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
