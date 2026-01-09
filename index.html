@@ -168,6 +168,81 @@
       50% { transform: translateY(-12px); }
       100% { transform: translateY(0); }
     }
+    /* =========================
+   EMOJI DECORATIVE (CSS ONLY)
+   ========================= */
+
+/* Titlu principal */
+.hero h2::after {
+  content: " 🚀";
+}
+
+/* Features title */
+.features-title::after {
+  content: " ✨";
+}
+
+/* Ready title */
+.ready-title::after {
+  content: " 🎮";
+}
+
+/* Feature cards emoji */
+.feature-card:nth-child(1) .feature-title::before { content: "🔃 "; }
+.feature-card:nth-child(2) .feature-title::before { content: "⚡ "; }
+.feature-card:nth-child(3) .feature-title::before { content: "🗺️ "; }
+.feature-card:nth-child(4) .feature-title::before { content: "🏆 "; }
+.feature-card:nth-child(5) .feature-title::before { content: "🛠️ "; }
+
+/* Bottom title */
+.bottom-left h3::after {
+  content: " 💎";
+}
+
+/* =========================
+   DISCORD BUTTON – LOGO ONLY VIA CSS
+   ========================= */
+
+.btn-discord {
+  position: relative;
+  padding-left: 52px !important;
+}
+
+/* Discord logo (CSS background, no HTML edit) */
+.btn-discord::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  width: 22px;
+  height: 22px;
+  background-image: url("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: invert(1);
+}
+
+/* Hover glow Discord */
+.btn-discord:hover {
+  box-shadow: 0 0 25px rgba(88,101,242,0.6) !important;
+}
+
+/* =========================
+   MICRO ANIMATIONS (SAFE)
+   ========================= */
+
+/* Emoji pulse */
+.feature-title::before,
+.hero h2::after,
+.ready-title::after {
+  animation: emojiPulse 2s infinite ease-in-out;
+}
+
+@keyframes emojiPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+    
   </style>
 </head>
 
