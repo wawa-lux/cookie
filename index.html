@@ -914,7 +914,22 @@ body {
   visibility: visible !important;
   filter: drop-shadow(0 0 8px rgba(88,101,242,0.9));
 }
-    
+    .btn-discord::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  width: 22px;
+  height: 22px;
+  background-image: url("https://www.pngfind.com/pngs/m/28-283551_discord-discord-icon-transparent-white-hd-png-download.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: invert(1);
+}
+
+/* Hover glow Discord */
+.btn-discord:hover {
+  box-shadow: 0 0 25px rgba(88,101,242,0.6) !important;
+}
   </style>
 </head>
 
