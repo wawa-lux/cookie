@@ -854,6 +854,47 @@ body {
     0 40px 120px rgba(0,0,0,0.9);
   filter: brightness(1.18);
 }
+    /* =========================
+   SMOOTH SCROLL ANIMATIONS
+   ========================= */
+
+.feature-card {
+  transition:
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 1s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow, filter;
+}
+
+.feature-card.active {
+  transform: translateY(-18px) scale(1.08);
+  box-shadow:
+    0 0 80px rgba(0,180,255,0.65),
+    0 0 160px rgba(0,120,255,0.45),
+    0 60px 140px rgba(0,0,0,0.95);
+  filter: brightness(1.22);
+}
+    /* =========================
+   FIX DISCORD LOGO
+   ========================= */
+
+.btn-discord {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-discord img {
+  display: inline-block;
+  width: 22px;
+  height: auto;
+  filter: drop-shadow(0 0 6px rgba(88,101,242,0.8));
+}
+
+/* Asigură că nu e ascuns */
+.btn-discord {
+  overflow: visible !important;
+}
     
   </style>
 </head>
