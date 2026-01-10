@@ -895,6 +895,48 @@ body {
 .btn-discord {
   overflow: visible !important;
 }
+    /* =========================
+   ULTRA SMOOTH SCROLL ANIMATIONS
+   ========================= */
+
+.feature-card {
+  transition:
+    transform 1.4s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 1.4s cubic-bezier(0.19, 1, 0.22, 1),
+    filter 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, box-shadow, filter;
+}
+
+.feature-card.active {
+  transform: translateY(-20px) scale(1.09);
+  box-shadow:
+    0 0 90px rgba(0,180,255,0.7),
+    0 0 180px rgba(0,120,255,0.45),
+    0 70px 160px rgba(0,0,0,1);
+  filter: brightness(1.25);
+}
+    /* =========================
+   DISCORD BUTTON – FINAL FIX
+   ========================= */
+
+.btn-discord {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 12px;
+  overflow: visible !important;
+}
+
+/* FORȚĂM logo-ul să fie primul */
+.btn-discord img {
+  order: -1;
+  display: inline-block !important;
+  width: 24px !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: drop-shadow(0 0 8px rgba(88,101,242,0.9));
+}
     
   </style>
 </head>
