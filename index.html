@@ -274,6 +274,144 @@
     transform: translateY(0);
   }
 }
+    /* =========================
+   STUMBLEAURA-LIKE PREMIUM VISUAL
+   ========================= */
+
+/* Glass effect for sections */
+.hero,
+.features-section,
+.ready-section,
+.bottom-info {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border-radius: 22px;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+/* Hero depth */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at center,
+    rgba(255,255,255,0.18),
+    transparent 60%);
+  animation: heroGlow 12s linear infinite;
+}
+
+@keyframes heroGlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* =========================
+   VERSION 0.56 BADGE (TEXT ADDED VIA CSS)
+   ========================= */
+
+.hero-content h2::after {
+  content: " • Version 0.56";
+  display: inline-block;
+  margin-left: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  background: linear-gradient(180deg,#ffe066,#ffb703);
+  color: #402000;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transform: translateY(-4px);
+}
+
+/* =========================
+   FEATURE CARDS – MORE COMPLEX
+   ========================= */
+
+.feature-card {
+  background: rgba(255,255,255,0.12);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+  transform: translateX(-100%);
+}
+
+.feature-card:hover::before {
+  animation: shine 1.2s ease;
+}
+
+@keyframes shine {
+  to { transform: translateX(100%); }
+}
+
+.feature-card:hover {
+  transform: translateY(-14px) scale(1.03);
+}
+
+/* =========================
+   BUTTONS – MORE STUMBLEAURA FEEL
+   ========================= */
+
+.btn,
+.btn-discord {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after,
+.btn-discord::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle,
+    rgba(255,255,255,0.55),
+    transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.btn:hover::after,
+.btn-discord:hover::after {
+  opacity: 1;
+}
+
+/* =========================
+   PARTICLES – STRONGER DEPTH
+   ========================= */
+
+.particle {
+  filter: blur(0.4px);
+  animation:
+    floatUp 14s linear infinite,
+    flicker 3.5s infinite,
+    sway 6s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(14px); }
+}
+    
     
     
   </style>
