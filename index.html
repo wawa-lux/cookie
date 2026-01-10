@@ -316,18 +316,6 @@
    VERSION 0.56 BADGE (TEXT ADDED VIA CSS)
    ========================= */
 
-.hero-content h2::after {
-  content: " • Version 0.56";
-  display: inline-block;
-  margin-left: 10px;
-  padding: 6px 12px;
-  font-size: 14px;
-  background: linear-gradient(180deg,#ffe066,#ffb703);
-  color: #402000;
-  border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  transform: translateY(-4px);
-}
 
 /* =========================
    FEATURE CARDS – MORE COMPLEX
@@ -411,6 +399,196 @@
   0%,100% { transform: translateX(0); }
   50% { transform: translateX(14px); }
 }
+    /* =========================
+   ULTRA PREMIUM – STUMBLEAURA++
+   ========================= */
+
+/* Background depth layers */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.18), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(255,200,120,0.18), transparent 50%);
+  animation: bgDrift 20s ease-in-out infinite alternate;
+}
+
+body::after {
+  background:
+    linear-gradient(120deg, rgba(255,255,255,0.06), transparent 60%);
+}
+
+@keyframes bgDrift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-60px); }
+}
+
+/* =========================
+   GLASS SECTIONS – REALISTIC
+   ========================= */
+
+.hero,
+.features-section,
+.ready-section,
+.bottom-info {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.14),
+      rgba(255,255,255,0.04)
+    );
+  backdrop-filter: blur(18px) saturate(140%);
+  border-radius: 26px;
+  box-shadow:
+    0 40px 90px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.25),
+    inset 0 -1px 0 rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft animated glow inside sections */
+.hero::before,
+.features-section::before,
+.ready-section::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle,
+    rgba(255,255,255,0.22),
+    transparent 60%);
+  animation: sectionGlow 14s linear infinite;
+}
+
+@keyframes sectionGlow {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================
+   TEXT – GAME FEEL
+   ========================= */
+
+h1, h2, h3 {
+  text-shadow:
+    0 6px 20px rgba(0,0,0,0.45),
+    0 0 18px rgba(255,255,255,0.25);
+}
+
+p {
+  text-shadow:
+    0 4px 12px rgba(0,0,0,0.45);
+}
+
+/* =========================
+   FEATURE CARDS – DEPTH + MOTION
+   ========================= */
+
+.feature-card {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255,255,255,0.18),
+      rgba(255,255,255,0.05)
+    );
+  border-radius: 22px;
+  box-shadow:
+    0 25px 65px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.18);
+  transform-style: preserve-3d;
+  transition:
+    transform .45s cubic-bezier(.22,.61,.36,1),
+    box-shadow .45s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-18px) rotateX(8deg) rotateY(-6deg);
+  box-shadow: 0 45px 90px rgba(0,0,0,0.6);
+}
+
+/* Light sweep */
+.feature-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+  transform: translateX(-120%);
+}
+
+.feature-card:hover::after {
+  animation: sweep 1.2s ease;
+}
+
+@keyframes sweep {
+  to { transform: translateX(120%); }
+}
+
+/* =========================
+   BUTTONS – ENERGY
+   ========================= */
+
+.btn,
+.btn-discord {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.4),
+    inset 0 0 0 1px rgba(255,255,255,0.35);
+}
+
+.btn:hover,
+.btn-discord:hover {
+  transform: translateY(-6px) scale(1.06);
+}
+
+.btn::before,
+.btn-discord::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(circle,
+    rgba(255,255,255,0.6),
+    transparent 60%);
+  opacity: 0;
+}
+
+.btn:hover::before,
+.btn-discord:hover::before {
+  opacity: 1;
+  animation: buttonPulse 1.2s ease;
+}
+
+@keyframes buttonPulse {
+  from { transform: scale(.6); }
+  to { transform: scale(1.2); }
+}
+
+/* =========================
+   PARTICLES – MORE ALIVE
+   ========================= */
+
+.particle {
+  filter: blur(0.6px);
+  animation:
+    floatUp 16s linear infinite,
+    flicker 4s infinite,
+    sway 7s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+  }
     
     
     
