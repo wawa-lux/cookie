@@ -754,10 +754,70 @@ body {
   filter: brightness(1.08);
 }
     
+    /* =========================
+   CARD ACTIVE (CENTER GLOW)
+   ========================= */
+
+.feature-card {
+  transition:
+    box-shadow .5s ease,
+    transform .5s ease,
+    filter .5s ease;
+}
+
+.feature-card.active {
+  box-shadow:
+    0 0 60px rgba(0,180,255,0.55),
+    0 0 120px rgba(0,120,255,0.35),
+    0 40px 120px rgba(0,0,0,0.9);
+  transform: scale(1.06);
+  filter: brightness(1.15);
+}
+
+/* Text injectat – web info */
+.web-info {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #c7f0ff;
+  opacity: 0.85;
+  line-height: 1.5;
+}
     
   </style>
 </head>
 
+  <script>
+  const cards = document.querySelectorAll('.feature-card');
+
+  function updateActiveCard() {
+    const center = window.innerHeight / 2;
+
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.top + rect.height / 2;
+
+      if (Math.abs(cardCenter - center) < rect.height / 2) {
+        card.classList.add('active');
+
+        // Inject text doar o singură dată
+        if (!card.querySelector('.web-info')) {
+          const info = document.createElement('div');
+          info.className = 'web-info';
+          info.textContent =
+            'Optimized for web experience with smooth performance, stability and classic gameplay feeling.';
+          card.appendChild(info);
+        }
+
+      } else {
+        card.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveCard);
+  window.addEventListener('load', updateActiveCard);
+  </script>
+  
 <body>
 
 <div id="particles">
